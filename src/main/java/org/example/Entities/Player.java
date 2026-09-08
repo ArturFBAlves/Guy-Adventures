@@ -2,6 +2,7 @@ package org.example.Entities;
 
 import org.example.GamePanel;
 import org.example.KeyHandler;
+import org.example.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,15 +10,13 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
 
-    GamePanel gamePanel;
     KeyHandler keyHandler;
 
     public int screenX;
     public int screenY;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
-
-        this.gamePanel = gamePanel;
+        super(gamePanel);
         this.keyHandler = keyHandler;
 
         // Mantém o player no centro da tela
@@ -30,8 +29,8 @@ public class Player extends Entity {
                         - gamePanel.tileSize / 2;
 
         this.solidArea = new Rectangle(
-                8,
                 16,
+                21,
                 32,
                 32
         );
@@ -50,61 +49,27 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
+        up1 = setup("slime_up_1");
+        up2 = setup("slime_up_2");
+        down1 = setup("slime_down_1");
+        down2 = setup("slime_down_2");
+        left1 = setup("slime_left_1");
+        left2 = setup("slime_left_2");
+        right1 = setup("slime_right_1");
+        right2 = setup("slime_right_2");
 
+    }
+
+    public BufferedImage setup(String imageName) {
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
         try {
-
-            down1 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_down_1.png"
-                    )
-            );
-
-            down2 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_down_2.png"
-                    )
-            );
-
-            up1 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_up_1.png"
-                    )
-            );
-
-            up2 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_up_2.png"
-                    )
-            );
-
-            left1 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_left_1.png"
-                    )
-            );
-
-            left2 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_left_2.png"
-                    )
-            );
-
-            right1 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_right_1.png"
-                    )
-            );
-
-            right2 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_right_2.png"
-                    )
-            );
-
-        } catch (Exception e) {
-
+            image = ImageIO.read(getClass().getResourceAsStream("/Slime/"+imageName+".png"));
+            image = uTool.scaledImage(image, gamePanel.tileSize, gamePanel.tileSize);
+        }catch (Exception e){
             e.printStackTrace();
         }
+        return image;
     }
 
     public void update() {
@@ -229,9 +194,14 @@ public class Player extends Entity {
                     image,
                     screenX,
                     screenY,
-                    gamePanel.tileSize,
-                    gamePanel.tileSize,
                     null
+            );
+            g2d.setColor(Color.RED); // Define a cor da linha (vermelho para destacar)
+            g2d.drawRect(
+                    screenX + solidArea.x,
+                    screenY + solidArea.y,
+                    solidArea.width,
+                    solidArea.height
             );
         }
     }
