@@ -2,6 +2,7 @@ package org.example.Entities;
 
 import org.example.GamePanel;
 
+import java.awt.*;
 import java.util.Random;
 
 
@@ -11,6 +12,15 @@ public class NPC_Oldman extends Entity{
         direction = "down";
         speed = 1;
         getImage();
+
+        solidArea = new Rectangle(
+                12,
+                22,
+                36,
+                36
+        );
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
     }
 
     public void getImage() {
