@@ -2,6 +2,7 @@ package org.example.Entities;
 
 import org.example.GamePanel;
 import org.example.KeyHandler;
+import org.example.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,15 +10,14 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
 
-    GamePanel gamePanel;
     KeyHandler keyHandler;
 
     public int screenX;
     public int screenY;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
+        super(gamePanel);
 
-        this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
 
         // Mantém o player no centro da tela
@@ -29,12 +29,14 @@ public class Player extends Entity {
                 gamePanel.screenHeight / 2
                         - gamePanel.tileSize / 2;
 
-        this.solidArea = new Rectangle(
-                8,
+        solidArea = new Rectangle(
                 16,
+                21,
                 32,
                 32
         );
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
         getPlayerImage();
@@ -50,61 +52,15 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
+        up1 = setup("/Slime/slime_up_1");
+        up2 = setup("/Slime/slime_up_2");
+        down1 = setup("/Slime/slime_down_1");
+        down2 = setup("/Slime/slime_down_2");
+        left1 = setup("/Slime/slime_left_1");
+        left2 = setup("/Slime/slime_left_2");
+        right1 = setup("/Slime/slime_right_1");
+        right2 = setup("/Slime/slime_right_2");
 
-        try {
-
-            down1 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_down_1.png"
-                    )
-            );
-
-            down2 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_down_2.png"
-                    )
-            );
-
-            up1 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_up_1.png"
-                    )
-            );
-
-            up2 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_up_2.png"
-                    )
-            );
-
-            left1 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_left_1.png"
-                    )
-            );
-
-            left2 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_left_2.png"
-                    )
-            );
-
-            right1 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_right_1.png"
-                    )
-            );
-
-            right2 = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Slime/slime_right_2.png"
-                    )
-            );
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
     }
 
     public void update() {
@@ -135,6 +91,9 @@ public class Player extends Entity {
 
         // Verifica colisão
         collision = false;
+
+        int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
+        interactNPC(npcIndex);
 
         gamePanel.collisionChecker.checkTile(this);
 
@@ -173,6 +132,12 @@ public class Player extends Entity {
             }
 
             spriteCount = 0;
+        }
+    }
+
+    public void interactNPC(int index) {
+        if (index != 999) {
+            System.out.println("Hitting an npc!");
         }
     }
 
@@ -229,9 +194,14 @@ public class Player extends Entity {
                     image,
                     screenX,
                     screenY,
-                    gamePanel.tileSize,
-                    gamePanel.tileSize,
                     null
+            );
+            g2d.setColor(Color.RED); // Define a cor da linha (vermelho para destacar)
+            g2d.drawRect(
+                    screenX + solidArea.x,
+                    screenY + solidArea.y,
+                    solidArea.width,
+                    solidArea.height
             );
         }
     }

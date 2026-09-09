@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Entities.AssetSetter;
+import org.example.Entities.Entity;
 import org.example.Entities.Player;
 import org.example.Tile.TileManager;
 
@@ -8,7 +10,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
-    final int scale = 3;
+    final int scale = 4;
 
     public int tileSize = originalTileSize * scale;
     public int maxScreenCol = 16;
@@ -28,8 +30,11 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
 
     public Player player = new Player(this, keyHandler);
+    public Entity[] npc = new Entity[10];
+
     public TileManager tileManager =  new TileManager(this);
     public CollisionChecker collisionChecker = new  CollisionChecker(this);
+    public AssetSetter assetSetter = new AssetSetter(this);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -39,6 +44,11 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
     }
+
+    public void setupGame() {
+        assetSetter.setNPC();
+    }
+
 
     public void startGameThread() {
         gameThread = new Thread(this);
@@ -72,13 +82,33 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         player.update();
+        for (int i = 0; i < npc.length; i++) {
+            if (npc[i] != null) {
+                npc[i].update();
+            }
+        }
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         tileManager.draw(g2d);
-        player.draw(g2d);
+
+        // Junta todas as entidades desenháveis numa lista
+        java.util.List<Entity> entityList = new java.util.ArrayList<>();
+        entityList.add(player);
+        for (Entity n : npc) {
+            if (n != null) {
+                entityList.add(n);
+            }
+        }
+
+        // Ordena por worldY (quem está mais acima na tela desenha primeiro)
+        entityList.sort((e1, e2) -> Integer.compare(e1.worldY, e2.worldY));
+
+        for (Entity e : entityList) {
+            e.draw(g2d);
+        }
 
         g2d.dispose();
     }
