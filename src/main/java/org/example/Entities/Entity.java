@@ -17,10 +17,60 @@ public class Entity {
     public int spriteCount = 0;
     public int spriteNumber = 1;
     public Rectangle solidArea = new Rectangle(0,0,48,48);
+    public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision = false;
+    public int actionLockCounter = 0;
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+    }
+
+    public void setAction() {}
+
+    public void update() {
+        setAction();
+        collision = false;
+        gamePanel.collisionChecker.checkTile(this);
+        //object
+        gamePanel.collisionChecker.checkPlayer(this);
+
+
+        if (!collision) {
+
+            switch (direction) {
+
+                case "up":
+                    worldY -= speed;
+                    break;
+
+                case "down":
+                    worldY += speed;
+                    break;
+
+                case "left":
+                    worldX -= speed;
+                    break;
+
+                case "right":
+                    worldX += speed;
+                    break;
+            }
+        }
+
+        // Animação
+        spriteCount++;
+
+        if (spriteCount > 15) {
+
+            if (spriteNumber == 1) {
+                spriteNumber = 2;
+            } else {
+                spriteNumber = 1;
+            }
+
+            spriteCount = 0;
+        }
+
     }
 
     public void draw(Graphics2D g2d) {

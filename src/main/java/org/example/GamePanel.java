@@ -82,19 +82,32 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         player.update();
+        for (int i = 0; i < npc.length; i++) {
+            if (npc[i] != null) {
+                npc[i].update();
+            }
+        }
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         tileManager.draw(g2d);
-        player.draw(g2d);
 
-        //NPC
-        for (int i = 0; i < npc.length; i++) {
-            if (npc[i] != null) {
-                npc[i].draw(g2d);
+        // Junta todas as entidades desenháveis numa lista
+        java.util.List<Entity> entityList = new java.util.ArrayList<>();
+        entityList.add(player);
+        for (Entity n : npc) {
+            if (n != null) {
+                entityList.add(n);
             }
+        }
+
+        // Ordena por worldY (quem está mais acima na tela desenha primeiro)
+        entityList.sort((e1, e2) -> Integer.compare(e1.worldY, e2.worldY));
+
+        for (Entity e : entityList) {
+            e.draw(g2d);
         }
 
         g2d.dispose();

@@ -29,12 +29,14 @@ public class Player extends Entity {
                 gamePanel.screenHeight / 2
                         - gamePanel.tileSize / 2;
 
-        this.solidArea = new Rectangle(
+        solidArea = new Rectangle(
                 16,
                 21,
                 32,
                 32
         );
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
         getPlayerImage();
@@ -90,6 +92,9 @@ public class Player extends Entity {
         // Verifica colisão
         collision = false;
 
+        int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
+        interactNPC(npcIndex);
+
         gamePanel.collisionChecker.checkTile(this);
 
         // Só movimenta se não houver colisão
@@ -127,6 +132,12 @@ public class Player extends Entity {
             }
 
             spriteCount = 0;
+        }
+    }
+
+    public void interactNPC(int index) {
+        if (index != 999) {
+            System.out.println("Hitting an npc!");
         }
     }
 
