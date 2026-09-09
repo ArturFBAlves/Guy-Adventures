@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Entities.AssetSetter;
+import org.example.Entities.Entity;
 import org.example.Entities.Player;
 import org.example.Tile.TileManager;
 
@@ -28,8 +30,11 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
 
     public Player player = new Player(this, keyHandler);
+    public Entity[] npc = new Entity[10];
+
     public TileManager tileManager =  new TileManager(this);
     public CollisionChecker collisionChecker = new  CollisionChecker(this);
+    public AssetSetter assetSetter = new AssetSetter(this);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -39,6 +44,11 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
     }
+
+    public void setupGame() {
+        assetSetter.setNPC();
+    }
+
 
     public void startGameThread() {
         gameThread = new Thread(this);
@@ -79,6 +89,13 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2d = (Graphics2D) g;
         tileManager.draw(g2d);
         player.draw(g2d);
+
+        //NPC
+        for (int i = 0; i < npc.length; i++) {
+            if (npc[i] != null) {
+                npc[i].draw(g2d);
+            }
+        }
 
         g2d.dispose();
     }

@@ -17,6 +17,7 @@ public class Player extends Entity {
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         super(gamePanel);
+
         this.keyHandler = keyHandler;
 
         // Mantém o player no centro da tela
@@ -49,27 +50,15 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
-        up1 = setup("slime_up_1");
-        up2 = setup("slime_up_2");
-        down1 = setup("slime_down_1");
-        down2 = setup("slime_down_2");
-        left1 = setup("slime_left_1");
-        left2 = setup("slime_left_2");
-        right1 = setup("slime_right_1");
-        right2 = setup("slime_right_2");
+        up1 = setup("/Slime/slime_up_1");
+        up2 = setup("/Slime/slime_up_2");
+        down1 = setup("/Slime/slime_down_1");
+        down2 = setup("/Slime/slime_down_2");
+        left1 = setup("/Slime/slime_left_1");
+        left2 = setup("/Slime/slime_left_2");
+        right1 = setup("/Slime/slime_right_1");
+        right2 = setup("/Slime/slime_right_2");
 
-    }
-
-    public BufferedImage setup(String imageName) {
-        UtilityTool uTool = new UtilityTool();
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream("/Slime/"+imageName+".png"));
-            image = uTool.scaledImage(image, gamePanel.tileSize, gamePanel.tileSize);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return image;
     }
 
     public void update() {

@@ -2,11 +2,24 @@ package org.example.Entities;
 
 import org.example.GamePanel;
 
+
 public class NPC_Oldman extends Entity{
     public NPC_Oldman(GamePanel gamePanel) {
         super(gamePanel);
+        direction = "down";
+        speed = 1;
+
+        getImage();
     }
-//
-//    direction = "down";
-//    speed = 1;
+
+    public void getImage() {
+        up1 = setup("/npc/oldman_up_1");
+        up2 = setup("/npc/oldman_up_2");
+        down1 = setup("/npc/oldman_down_1");
+        down2 = setup("/npc/oldman_down_2");
+        left1 = setup("/npc/oldman_left_1");
+        left2 = setup("/npc/oldman_left_2");
+        right1 = setup("/npc/oldman_right_1");
+        right2 = setup("/npc/oldman_right_2");
+    }
 }
