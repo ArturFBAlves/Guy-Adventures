@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 public class Player extends Entity {
 
     KeyHandler keyHandler;
-
     public int screenX;
     public int screenY;
 
