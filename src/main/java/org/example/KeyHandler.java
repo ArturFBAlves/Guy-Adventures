@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     GamePanel gamePanel;
-    public boolean upPressed,  downPressed, leftPressed, rightPressed;
+    public boolean upPressed,  downPressed, leftPressed, rightPressed, fPressed;
 
     public KeyHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -35,6 +35,9 @@ public class KeyHandler implements KeyListener {
             }
             if (key == KeyEvent.VK_P) {
                 gamePanel.gameState = gamePanel.pauseState;
+            }
+            if (key == KeyEvent.VK_F) {
+                fPressed = true;
             }
         }
 

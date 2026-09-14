@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int screenHeight = maxScreenRow * tileSize;
 
     Thread gameThread;
-    KeyHandler keyHandler =  new KeyHandler(this);
+    public KeyHandler keyHandler =  new KeyHandler(this);
 
     //World Map
     public final int maxWorldCol = 50;
@@ -105,6 +105,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;

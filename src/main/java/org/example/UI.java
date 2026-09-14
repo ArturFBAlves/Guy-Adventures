@@ -58,7 +58,11 @@ public class UI {
 
         x += gamePanel.tileSize;
         y += gamePanel.tileSize;
-        g2d.drawString(currentDialogue, x, y);
+
+        for (String line : currentDialogue.split("\n")) {
+            g2d.drawString(line, x, y);
+            y+=40;
+        }
 
     }
 

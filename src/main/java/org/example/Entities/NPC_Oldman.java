@@ -26,8 +26,8 @@ public class NPC_Oldman extends Entity{
 
     public void setDialogue() {
         dialogues[0] = "Olá viajante";
-        dialogues[1] = "Este é um novo dialogo";
-        dialogues[2] = "testetesteteste";
+        dialogues[1] = "Este é um novo dialogo fwefwecfwfwce";
+        dialogues[2] = "testetestewgwgwegwefwfwefwefwefwefwfwe\nfwefewvrtht3therywerywyuwehrg\n79werofgheoguergrgerfteste";
         dialogues[3] = "blablabla";
     }
 
@@ -42,6 +42,7 @@ public class NPC_Oldman extends Entity{
         right2 = setup("/npc/oldman_right_2");
     }
 
+    @Override
     public void setAction() {
         actionLockCounter++;
         if(actionLockCounter == 120){
@@ -66,11 +67,6 @@ public class NPC_Oldman extends Entity{
 
     @Override
     public void speak() {
-        if (dialogues[dialogueIndex] == null ){
-            dialogueIndex = 0;
-        }
-        gamePanel.ui.currentDialogue = dialogues[dialogueIndex];
-        dialogueIndex++;
+        super.speak();
     }
-
 }
