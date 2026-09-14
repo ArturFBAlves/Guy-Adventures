@@ -21,6 +21,14 @@ public class NPC_Oldman extends Entity{
         );
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        setDialogue();
+    }
+
+    public void setDialogue() {
+        dialogues[0] = "Olá viajante";
+        dialogues[1] = "Este é um novo dialogo";
+        dialogues[2] = "testetesteteste";
+        dialogues[3] = "blablabla";
     }
 
     public void getImage() {
@@ -55,4 +63,14 @@ public class NPC_Oldman extends Entity{
             actionLockCounter = 0;
         }
     }
+
+    @Override
+    public void speak() {
+        if (dialogues[dialogueIndex] == null ){
+            dialogueIndex = 0;
+        }
+        gamePanel.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+    }
+
 }

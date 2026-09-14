@@ -136,7 +136,8 @@ public class Player extends Entity {
 
     public void interactNPC(int index) {
         if (index != 999) {
-            System.out.println("Hitting an npc!");
+            gamePanel.gameState = gamePanel.dialogueState;
+            gamePanel.npc[index].speak();
         }
     }
 
