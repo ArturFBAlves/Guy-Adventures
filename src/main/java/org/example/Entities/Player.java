@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 public class Player extends Entity {
 
     KeyHandler keyHandler;
-
     public int screenX;
     public int screenY;
 
@@ -63,6 +62,7 @@ public class Player extends Entity {
 
     }
 
+    @Override
     public void update() {
 
         // Se nenhuma tecla estiver pressionada,
@@ -137,10 +137,15 @@ public class Player extends Entity {
 
     public void interactNPC(int index) {
         if (index != 999) {
-            System.out.println("Hitting an npc!");
+            if (gamePanel.keyHandler.fPressed == true) {
+                gamePanel.gameState = gamePanel.dialogueState;
+                gamePanel.npc[index].speak();
+            }
         }
+        gamePanel.keyHandler.fPressed = false;
     }
 
+    @Override
     public void draw(Graphics2D g2d) {
 
         BufferedImage image = null;

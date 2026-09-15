@@ -4,8 +4,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
+    GamePanel gamePanel;
+    public boolean upPressed,  downPressed, leftPressed, rightPressed, fPressed;
 
-    public boolean upPressed,  downPressed, leftPressed, rightPressed;
+    public KeyHandler(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -15,18 +20,39 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
 
-        if (key == KeyEvent.VK_W) {
-            upPressed = true;
+        if (gamePanel.gameState == gamePanel.playState) {
+            if (key == KeyEvent.VK_W) {
+                upPressed = true;
+            }
+            if (key == KeyEvent.VK_A) {
+                leftPressed = true;
+            }
+            if (key == KeyEvent.VK_S) {
+                downPressed = true;
+            }
+            if (key == KeyEvent.VK_D) {
+                rightPressed = true;
+            }
+            if (key == KeyEvent.VK_P) {
+                gamePanel.gameState = gamePanel.pauseState;
+            }
+            if (key == KeyEvent.VK_F) {
+                fPressed = true;
+            }
         }
-        if (key == KeyEvent.VK_A) {
-            leftPressed = true;
+
+        else if(gamePanel.gameState == gamePanel.pauseState ) {
+            if (key == KeyEvent.VK_P) {
+                gamePanel.gameState = gamePanel.playState;
+            }
         }
-        if (key == KeyEvent.VK_S) {
-            downPressed = true;
+
+        else if (gamePanel.gameState == gamePanel.dialogueState) {
+            if (key == KeyEvent.VK_X) {
+                gamePanel.gameState = gamePanel.playState;
+            }
         }
-        if (key == KeyEvent.VK_D) {
-            rightPressed  = true;
-        }
+
     }
 
     @Override
