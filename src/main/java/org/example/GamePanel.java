@@ -4,6 +4,7 @@ import org.example.Entities.AssetSetter;
 import org.example.Entities.Entity;
 import org.example.Entities.Player;
 import org.example.Tile.TileManager;
+import org.example.object.SuperObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +36,9 @@ public class GamePanel extends JPanel implements Runnable {
     public TileManager tileManager =  new TileManager(this);
     public CollisionChecker collisionChecker = new  CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
+    public SuperObject[] obj = new SuperObject[10];
     public UI ui = new UI(this);
+    public EventHandler eHandler = new EventHandler(this);
 
 
     public int gameState;

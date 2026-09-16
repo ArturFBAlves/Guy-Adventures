@@ -48,6 +48,9 @@ public class Player extends Entity {
 
         speed = 4;
         direction = "down";
+
+        maxLife = 6;
+        life = maxLife;
     }
 
     public void getPlayerImage() {
@@ -94,6 +97,9 @@ public class Player extends Entity {
 
         int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
         interactNPC(npcIndex);
+
+        gamePanel.eHandler.checkEvent();
+        gamePanel.keyHandler.fPressed = false;
 
         gamePanel.collisionChecker.checkTile(this);
 
@@ -142,7 +148,6 @@ public class Player extends Entity {
                 gamePanel.npc[index].speak();
             }
         }
-        gamePanel.keyHandler.fPressed = false;
     }
 
     @Override
