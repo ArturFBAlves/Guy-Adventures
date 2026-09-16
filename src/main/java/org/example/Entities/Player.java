@@ -98,6 +98,9 @@ public class Player extends Entity {
         int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
         interactNPC(npcIndex);
 
+        gamePanel.eHandler.checkEvent();
+        gamePanel.keyHandler.fPressed = false;
+
         gamePanel.collisionChecker.checkTile(this);
 
         // Só movimenta se não houver colisão
@@ -145,7 +148,6 @@ public class Player extends Entity {
                 gamePanel.npc[index].speak();
             }
         }
-        gamePanel.keyHandler.fPressed = false;
     }
 
     @Override

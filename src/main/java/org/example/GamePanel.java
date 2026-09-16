@@ -36,8 +36,9 @@ public class GamePanel extends JPanel implements Runnable {
     public TileManager tileManager =  new TileManager(this);
     public CollisionChecker collisionChecker = new  CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
-    public SuperObject obj[] = new SuperObject[10];
+    public SuperObject[] obj = new SuperObject[10];
     public UI ui = new UI(this);
+    public EventHandler eHandler = new EventHandler(this);
 
 
     public int gameState;
