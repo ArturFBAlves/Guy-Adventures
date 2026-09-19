@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 public class TileManager {
     GamePanel gamePanel;
     public Tile[] tiles;
-    public int mapTileNum[][];
+    public int[][] mapTileNum;
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -25,18 +25,40 @@ public class TileManager {
     }
 
     public void getTileImage() {
-        setup(0, "grass_tile", true);
-        setup(1, "brick_tile", false);
-        setup(2, "water_tile", true);
-        setup(3, "grass1_tile", false);
-        setup(4, "grass2_tile", false);
-        setup(5, "grass3_tile", false);
-        setup(6, "tree1_tile", true);
-        setup(7, "straightside_path_tile", false);
-        setup(8, "grass0_tile1", false);
-        setup(9, "sand_tile1", false);
-        setup(10, "sand_tile2", false);
-        setup(11, "sandshell_tile3", false);
+//        setup(0, "grass_tile", true);
+//        setup(1, "brick_tile", false);
+//        setup(2, "water_tile", true);
+//        setup(3, "grass1_tile", false);
+//        setup(4, "grass2_tile", false);
+//        setup(5, "grass3_tile", false);
+        setup(18, "tree2_tile", true);
+//        setup(7, "straightside_path_tile", false);
+//        setup(8, "grass0_tile1", false);
+//        setup(9, "sand_tile1", false);
+//        setup(10, "sand_tile2", false);
+//        setup(11, "sandshell_tile3", false);
+
+        setup(0, "grass1", false);
+        setup(1, "grass2", false);
+        setup(2, "grass3", false);
+        setup(3, "grass4", false);
+        setup(4, "grass5", false);
+        setup(5, "grass6", false);
+        setup(6, "grass7", false);
+        setup(7, "grass8", false);
+        setup(8, "grass9", false);
+
+        setup(9, "water1", true);
+        setup(10, "water2", true);
+        setup(11, "water3", true);
+        setup(12, "water4", true);
+        setup(13, "water5", true);
+        setup(14, "water6", true);
+        setup(15, "water7", true);
+        setup(16, "water8", true);
+        setup(17, "water9", true);
+
+
     }
 
     public void setup(int index, String imagePath, boolean collision) {
