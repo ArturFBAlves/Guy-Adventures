@@ -4,7 +4,6 @@ import org.example.GamePanel;
 import org.example.KeyHandler;
 import org.example.UtilityTool;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -19,21 +18,10 @@ public class Player extends Entity {
 
         this.keyHandler = keyHandler;
 
-        // Mantém o player no centro da tela
-        this.screenX =
-                gamePanel.screenWidth / 2
-                        - gamePanel.tileSize / 2;
+        this.screenX = gamePanel.screenWidth / 2 - gamePanel.tileSize / 2;
+        this.screenY = gamePanel.screenHeight / 2 - gamePanel.tileSize / 2;
 
-        this.screenY =
-                gamePanel.screenHeight / 2
-                        - gamePanel.tileSize / 2;
-
-        solidArea = new Rectangle(
-                16,
-                21,
-                32,
-                32
-        );
+        solidArea = new Rectangle(16, 21, 32, 32);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -42,13 +30,10 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-
         worldX = gamePanel.tileSize * 23;
         worldY = gamePanel.tileSize * 23;
-
         speed = 4;
         direction = "down";
-
         maxLife = 6;
         life = maxLife;
     }
@@ -62,81 +47,60 @@ public class Player extends Entity {
         left2 = setup("/Slime/slime_left_2");
         right1 = setup("/Slime/slime_right_1");
         right2 = setup("/Slime/slime_right_2");
-
     }
 
     @Override
     public void update() {
 
-        // Se nenhuma tecla estiver pressionada,
-        // o personagem não se move.
+        // Se estiver em diálogo, o player fica totalmente travado (não anda nem anima)
+        if (gamePanel.gameState == gamePanel.dialogueState) {
+            return; 
+        }
+
         if (!keyHandler.upPressed
                 && !keyHandler.downPressed
                 && !keyHandler.leftPressed
                 && !keyHandler.rightPressed) {
 
+            int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
+            interactNPC(npcIndex);
             return;
         }
 
-        // Define a direção
         if (keyHandler.upPressed) {
             direction = "up";
-
         } else if (keyHandler.downPressed) {
             direction = "down";
-
         } else if (keyHandler.leftPressed) {
             direction = "left";
-
         } else if (keyHandler.rightPressed) {
             direction = "right";
         }
 
-        // Verifica colisão
         collision = false;
+        gamePanel.collisionChecker.checkTile(this);
 
         int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
         interactNPC(npcIndex);
 
         gamePanel.eHandler.checkEvent();
-        gamePanel.keyHandler.fPressed = false;
 
-        gamePanel.collisionChecker.checkTile(this);
-
-        // Só movimenta se não houver colisão
         if (!collision) {
-
             switch (direction) {
-
-                case "up":
-                    worldY -= speed;
-                    break;
-
-                case "down":
-                    worldY += speed;
-                    break;
-
-                case "left":
-                    worldX -= speed;
-                    break;
-
-                case "right":
-                    worldX += speed;
-                    break;
+                case "up": worldY -= speed; break;
+                case "down": worldY += speed; break;
+                case "left": worldX -= speed; break;
+                case "right": worldX += speed; break;
             }
         }
 
-        // Animação
         spriteCount++;
-
         if (spriteCount > 15) {
-
             if (spriteNumber == 1) {
                 spriteNumber = 2;
             } else {
                 spriteNumber = 1;
             }
-
             spriteCount = 0;
         }
     }
@@ -146,73 +110,34 @@ public class Player extends Entity {
             if (gamePanel.keyHandler.fPressed == true) {
                 gamePanel.gameState = gamePanel.dialogueState;
                 gamePanel.npc[index].speak();
+                gamePanel.keyHandler.fPressed = false; 
             }
         }
     }
 
     @Override
     public void draw(Graphics2D g2d) {
-
         BufferedImage image = null;
 
         switch (direction) {
-
             case "up":
-
-                if (spriteNumber == 1) {
-                    image = up1;
-                } else {
-                    image = up2;
-                }
-
+                if (spriteNumber == 1) { image = up1; } else { image = up2; }
                 break;
-
             case "down":
-
-                if (spriteNumber == 1) {
-                    image = down1;
-                } else {
-                    image = down2;
-                }
-
+                if (spriteNumber == 1) { image = down1; } else { image = down2; }
                 break;
-
             case "left":
-
-                if (spriteNumber == 1) {
-                    image = left1;
-                } else {
-                    image = left2;
-                }
-
+                if (spriteNumber == 1) { image = left1; } else { image = left2; }
                 break;
-
             case "right":
-
-                if (spriteNumber == 1) {
-                    image = right1;
-                } else {
-                    image = right2;
-                }
-
+                if (spriteNumber == 1) { image = right1; } else { image = right2; }
                 break;
         }
 
         if (image != null) {
-
-            g2d.drawImage(
-                    image,
-                    screenX,
-                    screenY,
-                    null
-            );
-            g2d.setColor(Color.RED); // Define a cor da linha (vermelho para destacar)
-            g2d.drawRect(
-                    screenX + solidArea.x,
-                    screenY + solidArea.y,
-                    solidArea.width,
-                    solidArea.height
-            );
+            g2d.drawImage(image, screenX, screenY, null);
+            g2d.setColor(Color.RED);
+            g2d.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
         }
     }
 }

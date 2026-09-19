@@ -13,5 +13,20 @@ public class AssetSetter {
         gamePanel.npc[0] = new NPC_Oldman(gamePanel);
         gamePanel.npc[0].worldX = gamePanel.tileSize*21;
         gamePanel.npc[0].worldY = gamePanel.tileSize*21;
+        
+        // Sumo Sacerdote
+        gamePanel.npc[1] = new NPC_HighPriest(gamePanel);
+        gamePanel.npc[1].worldX = gamePanel.tileSize * 25;
+        gamePanel.npc[1].worldY = gamePanel.tileSize * 15;
+
+        // Bandido
+        gamePanel.npc[2] = new NPC_Bandit(gamePanel);
+        gamePanel.npc[2].worldX = gamePanel.tileSize * 18;
+        gamePanel.npc[2].worldY = gamePanel.tileSize * 28;
+
+        // Arcanjo
+        gamePanel.npc[3] = new NPC_Archangel(gamePanel);
+        gamePanel.npc[3].worldX = gamePanel.tileSize * 30;
+        gamePanel.npc[3].worldY = gamePanel.tileSize * 10;
     }
 }

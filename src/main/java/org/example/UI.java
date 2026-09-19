@@ -5,7 +5,6 @@ import org.example.object.SuperObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.text.DecimalFormat;
 
 public class UI {
     GamePanel gamePanel;
@@ -50,11 +49,9 @@ public class UI {
             drawPlayerLife();
             drawDialogueScreen();
         }
-
     }
 
     public void drawPlayerLife() {
-
         int x = gamePanel.tileSize/2;
         int y = gamePanel.tileSize/2;
         int i = 0;
@@ -69,7 +66,7 @@ public class UI {
         y = gamePanel.tileSize/2;
         i = 0;
 
-        while  (i < gamePanel.player.life) {
+        while (i < gamePanel.player.life) {
             g2d.drawImage(heart_half, x, y, null);
             i++;
             if (i < gamePanel.player.life) {
@@ -78,7 +75,6 @@ public class UI {
             i++;
             x += gamePanel.tileSize;
         }
-
     }
 
     public void drawPauseScreen() {
@@ -87,34 +83,37 @@ public class UI {
         g2d.drawString(text, x, y);
     }
 
-
     public void drawDialogueScreen() {
-        int x = gamePanel.tileSize*2,
-                y = gamePanel.tileSize/2,
-                width = gamePanel.screenWidth - (gamePanel.tileSize*4),
-                height= gamePanel.screenHeight/3;
+        // Janela de Diálogo
+        int x = gamePanel.tileSize * 2;
+        int y = gamePanel.tileSize / 2;
+        int width = gamePanel.screenWidth - (gamePanel.tileSize * 4);
+        int height = gamePanel.screenHeight / 3;
 
         drawSubWindow(x, y, width, height);
 
         x += gamePanel.tileSize;
         y += gamePanel.tileSize;
+        g2d.setFont(g2d.getFont().deriveFont(Font.PLAIN, 28));
 
-        for (String line : currentDialogue.split("\n")) {
-            g2d.drawString(line, x, y);
-            y+=40;
+        // Se houver texto definido, desenha linha por linha quebrando com \n
+        if (currentDialogue != null) {
+            for (String line : currentDialogue.split("\n")) {
+                g2d.drawString(line, x, y);
+                y += 40;
+            }
         }
-
     }
 
     public void drawSubWindow(int x, int y, int width, int height) {
-        Color c = new Color(0,0,0, 180);
+        Color c = new Color(0, 0, 0, 200);
         g2d.setColor(c);
         g2d.fillRoundRect(x, y, width, height, 35, 35);
 
         c = new Color(255, 255, 255);
         g2d.setColor(c);
-        g2d.setStroke(new BasicStroke(4));
-        g2d.drawRoundRect(x+10, y+10, width-20, height-20, 20, 20);
+        g2d.setStroke(new BasicStroke(5));
+        g2d.drawRoundRect(x + 10, y + 10, width - 20, height - 20, 25, 25);
     }
 
     public int getXForCenteredText(String text) {
@@ -122,5 +121,4 @@ public class UI {
         int x = gamePanel.screenWidth/2 - length/2;
         return x;
     }
-
 }

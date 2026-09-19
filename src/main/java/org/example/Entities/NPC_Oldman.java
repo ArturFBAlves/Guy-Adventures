@@ -5,30 +5,25 @@ import org.example.GamePanel;
 import java.awt.*;
 import java.util.Random;
 
-
-public class NPC_Oldman extends Entity{
+public class NPC_Oldman extends Entity {
+    
     public NPC_Oldman(GamePanel gamePanel) {
         super(gamePanel);
         direction = "down";
         speed = 1;
         getImage();
 
-        solidArea = new Rectangle(
-                12,
-                22,
-                36,
-                36
-        );
+        solidArea = new Rectangle(12, 22, 36, 36);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         setDialogue();
     }
 
     public void setDialogue() {
-        dialogues[0] = "Olá viajante";
-        dialogues[1] = "Este é um novo dialogo fwefwecfwfwce";
-        dialogues[2] = "testetestewgwgwegwefwfwefwefwefwefwfwe\nfwefewvrtht3therywerywyuwehrg\n79werofgheoguergrgerfteste";
-        dialogues[3] = "blablabla";
+        dialogues[0] = "Você... você voltou para casa. \nA porta estava aberta, não estava?";
+        dialogues[1] = "Ela ouviu o chamado, Jack. Algumas coisas... \ndeveriam permanecer enterradas.";
+        dialogues[2] = "Se continuar a procurar... \nvai descobrir que algumas pessoas preferem \nperder alguém do que encarar a verdade.";
+        dialogues[3] = "Já é tarde demais para salvá-la. \nVá embora antes que seja tarde para si também.";
     }
 
     public void getImage() {
@@ -45,22 +40,18 @@ public class NPC_Oldman extends Entity{
     @Override
     public void setAction() {
         actionLockCounter++;
-        if(actionLockCounter == 120){
+        if (actionLockCounter == 120) {
             Random random = new Random();
-            int i = random.nextInt(100)+1;
-            if (i<=25){
+            int i = random.nextInt(100) + 1;
+            if (i <= 25) {
                 direction = "up";
-            }
-            if (i>25 && i<= 50){
+            } else if (i <= 50) {
                 direction = "down";
-            }
-            if (i>50 && i<= 75){
+            } else if (i <= 75) {
                 direction = "left";
-            }
-            if (i>75){
+            } else {
                 direction = "right";
             }
-
             actionLockCounter = 0;
         }
     }
