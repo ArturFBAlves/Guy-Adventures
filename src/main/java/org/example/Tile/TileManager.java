@@ -18,7 +18,7 @@ public class TileManager {
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        tiles = new Tile[20];
+        tiles = new Tile[50];
         mapTileNum = new int[gamePanel.maxWorldCol][gamePanel.maxWorldRow];
         getTileImage();
         loadMap();
@@ -57,6 +57,16 @@ public class TileManager {
         setup(15, "water7", true);
         setup(16, "water8", true);
         setup(17, "water9", true);
+
+        setup(19, "house1", true);
+        setup(20, "house2", true);
+        setup(21, "house3", true);
+        setup(22, "house4", true);
+        setup(23, "house5", true);
+        setup(24, "house6", true);
+        setup(25, "house7", true);
+        setup(26, "house8", true);
+        setup(27, "house9", true);
 
 
     }

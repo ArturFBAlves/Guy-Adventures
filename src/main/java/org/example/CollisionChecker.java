@@ -22,7 +22,8 @@ public class CollisionChecker {
         int entityTopRow = entityTopWorldY / gamePanel.tileSize;
         int entityBottomRow = entityBottomWorldY / gamePanel.tileSize;
 
-        int tileNum1, tileNum2;
+        int tileNum1;
+        int tileNum2;
 
         switch (entity.direction) {
 
@@ -31,11 +32,7 @@ public class CollisionChecker {
                 entityTopRow =
                         (entityTopWorldY - entity.speed) / gamePanel.tileSize;
 
-                // Saiu do mapa
-                if (entityTopRow < 0 ||
-                        entityLeftCol < 0 ||
-                        entityRightCol >= gamePanel.maxWorldCol) {
-
+                if (entityTopWorldY - entity.speed < 0) {
                     entity.collision = true;
                     return;
                 }
@@ -60,11 +57,7 @@ public class CollisionChecker {
                 entityBottomRow =
                         (entityBottomWorldY + entity.speed) / gamePanel.tileSize;
 
-                // Saiu do mapa
-                if (entityBottomRow >= gamePanel.maxWorldRow ||
-                        entityLeftCol < 0 ||
-                        entityRightCol >= gamePanel.maxWorldCol) {
-
+                if (entityBottomWorldY + entity.speed >= gamePanel.maxWorldRow * gamePanel.tileSize) {
                     entity.collision = true;
                     return;
                 }
@@ -89,11 +82,7 @@ public class CollisionChecker {
                 entityLeftCol =
                         (entityLeftWorldX - entity.speed) / gamePanel.tileSize;
 
-                // Saiu do mapa
-                if (entityLeftCol < 0 ||
-                        entityTopRow < 0 ||
-                        entityBottomRow >= gamePanel.maxWorldRow) {
-
+                if (entityLeftWorldX - entity.speed < 0) {
                     entity.collision = true;
                     return;
                 }
@@ -118,11 +107,7 @@ public class CollisionChecker {
                 entityRightCol =
                         (entityRightWorldX + entity.speed) / gamePanel.tileSize;
 
-                // Saiu do mapa
-                if (entityRightCol >= gamePanel.maxWorldCol ||
-                        entityTopRow < 0 ||
-                        entityBottomRow >= gamePanel.maxWorldRow) {
-
+                if (entityRightWorldX + entity.speed >= gamePanel.maxWorldCol * gamePanel.tileSize) {
                     entity.collision = true;
                     return;
                 }

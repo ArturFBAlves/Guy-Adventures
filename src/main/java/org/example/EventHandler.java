@@ -31,13 +31,12 @@ public class EventHandler {
         if (distance > gamePanel.tileSize) {
             canTouchEvent = true;
         }
-
         if (canTouchEvent) {
-            if (hit(16, 16, "any")) {
+            if (hit(26, 15, "any")) {
                 damagePit(gamePanel.dialogueState);
-            } else if (hit(17, 17, "any")) {
+            } else if (hit(27, 15, "any")) {
                 healingPool(gamePanel.dialogueState);
-            } else if (hit(18, 18, "any")) {
+            } else if (hit(28, 15, "any")) {
                 teleport(gamePanel.dialogueState);
             }
         }
