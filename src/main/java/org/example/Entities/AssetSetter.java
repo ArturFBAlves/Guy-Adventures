@@ -21,8 +21,8 @@ public class AssetSetter {
 
         // Bandido
         gamePanel.npc[2] = new NPC_Bandit(gamePanel);
-        gamePanel.npc[2].worldX = gamePanel.tileSize * 18;
-        gamePanel.npc[2].worldY = gamePanel.tileSize * 28;
+        gamePanel.npc[2].worldX = gamePanel.tileSize * 22;
+        gamePanel.npc[2].worldY = gamePanel.tileSize * 8;
 
         // Arcanjo
         gamePanel.npc[3] = new NPC_Archangel(gamePanel);

@@ -1,17 +1,23 @@
 package org.example.Entities;
 
 import org.example.GamePanel;
-
 import java.awt.*;
 import java.util.Random;
 
 public class NPC_Bandit extends Entity {
 
+    // Guarda a posição inicial para ele não se afastar muito
+    public int startX;
+    public int startY;
+
     public NPC_Bandit(GamePanel gamePanel) {
         super(gamePanel);
 
-        direction = "down";
-        speed = 1; // Velocidade baixa ou 0 se ele ficar estático na ponte
+        direction = "left";
+        speed = 1; // Velocidade de movimento lenta para a patrulha
+
+        maxLife = 6;
+        life = maxLife;
 
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = solidArea.x;
@@ -21,9 +27,7 @@ public class NPC_Bandit extends Entity {
         setDialogue();
     }
 
-    // 1. CARREGA AS IMAGENS DO BANDIDO
     public void getImage() {
-        // Certifique-se de colocar as imagens na pasta correta dentro de res (ex: /res/NPC/bandit_up_1.png)
         up1 = setup("/NPC/bandit_up_1");
         up2 = setup("/NPC/bandit_up_2");
         down1 = setup("/NPC/bandit_down_1");
@@ -34,22 +38,60 @@ public class NPC_Bandit extends Entity {
         right2 = setup("/NPC/bandit_right_2");
     }
 
-    // 2. DEFINE AS FALAS DO BANDIDO ANTES DA LUTA
     public void setDialogue() {
-        dialogues[0] = "Parado aí, aventureiro!\nEsta ponte pertence ao meu bando.";
-        dialogues[1] = "Se queres passar para o outro lado,\nterás de me enfrentar primeiro!";
+        dialogues[0] = "Parado aí, aventureiro!\nEsta ponte está sob o meu domínio.";
+        dialogues[1] = "Se queres passar, terás de me derrotar!";
     }
 
-    // 3. COMPORTAMENTO DE MOVIMENTO (Opcional: se ele fica parado na ponte, pode deixar vazio)
+    @Override
     public void setAction() {
-        // Se quiser que ele fique fixo a bloquear a ponte, não coloque nada aqui.
-        // Se quiser que ele ande aleatoriamente antes de falar, pode usar a lógica padrão de IA.
+        // Se a posição inicial ainda não foi guardada, guarda agora
+        if (startX == 0 && startY == 0) {
+            startX = worldX;
+            startY = worldY;
+        }
+
+        actionLockCounter++;
+        
+        // A cada 90 frames (~1.5 segundos), muda ou mantém a lógica de movimento
+        if (actionLockCounter == 90) {
+            Random random = new Random();
+            int i = random.nextInt(100) + 1;
+
+            if (i <= 50) {
+                direction = "left";
+            } else {
+                direction = "right";
+            }
+            actionLockCounter = 0;
+        }
+
+        // Limita o espaço de patrulha para ele andar apenas num curto espaço (ex: 3 tiles para cada lado)
+        int patrolLimit = gamePanel.tileSize * 3;
+        if (worldX < startX - patrolLimit) {
+            direction = "right";
+        }
+        if (worldX > startX + patrolLimit) {
+            direction = "left";
+        }
     }
 
-    // 4. AÇÃO EXECUTADA QUANDO O JOGADOR FALA COM ELE
+    @Override
     public void speak() {
-        super.speak(); // Chama o método padrão da Entity que avança as linhas do diálogo
+        if (dialogues[dialogueIndex] == null) {
+            dialogueIndex = 0;
+            gamePanel.gameState = gamePanel.battleState; // Entra na batalha
+            return;
+        }
         
-        // Aqui, quando o diálogo chegar ao fim, podes acionar o gatilho da luta contra o slime!
+        gamePanel.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+
+        switch(gamePanel.player.direction) {
+            case "up": direction = "down"; break;
+            case "down": direction = "up"; break;
+            case "left": direction = "right"; break;
+            case "right": direction = "left"; break;
+        }
     }
 }
