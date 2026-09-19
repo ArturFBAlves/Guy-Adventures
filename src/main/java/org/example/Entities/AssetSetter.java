@@ -10,7 +10,7 @@ public class AssetSetter {
     }
 
     public void setNPC() {
-        gamePanel.npc[0] = new NPC_Oldman(gamePanel);
+        gamePanel.npc[0] = new Maria(gamePanel);
         gamePanel.npc[0].worldX = gamePanel.tileSize*21;
         gamePanel.npc[0].worldY = gamePanel.tileSize*21;
         

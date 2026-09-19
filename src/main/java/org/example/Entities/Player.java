@@ -2,7 +2,6 @@ package org.example.Entities;
 
 import org.example.GamePanel;
 import org.example.KeyHandler;
-import org.example.UtilityTool;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -21,7 +20,11 @@ public class Player extends Entity {
         this.screenX = gamePanel.screenWidth / 2 - gamePanel.tileSize / 2;
         this.screenY = gamePanel.screenHeight / 2 - gamePanel.tileSize / 2;
 
-        solidArea = new Rectangle(16, 21, 32, 32);
+
+        spriteWidth = 86;
+        spriteHeight = 84;
+
+        solidArea = new Rectangle(spriteWidth/4, spriteHeight/4, (int)spriteWidth/2, spriteHeight/2);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -39,14 +42,14 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
-        up1 = setup("/Slime/slime_up_1");
-        up2 = setup("/Slime/slime_up_2");
-        down1 = setup("/Slime/slime_down_1");
-        down2 = setup("/Slime/slime_down_2");
-        left1 = setup("/Slime/slime_left_1");
-        left2 = setup("/Slime/slime_left_2");
-        right1 = setup("/Slime/slime_right_1");
-        right2 = setup("/Slime/slime_right_2");
+        up1 = setup("/Jack/Jack4");
+        up2 = setup("/Jack/Jack4");
+        down1 = setup("/Jack/Jack1");
+        down2 = setup("/Jack/Jack1");
+        left1 = setup("/Jack/Jack2");
+        left2 = setup("/Jack/Jack2");
+        right1 = setup("/Jack/Jack3");
+        right2 = setup("/Jack/Jack3");
     }
 
     @Override
@@ -135,7 +138,14 @@ public class Player extends Entity {
         }
 
         if (image != null) {
-            g2d.drawImage(image, screenX, screenY, null);
+            g2d.drawImage(
+                    image,
+                    screenX,
+                    screenY,
+                    spriteWidth,
+                    spriteHeight,
+                    null
+            );
             g2d.setColor(Color.RED);
             g2d.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
         }
