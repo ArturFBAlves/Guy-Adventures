@@ -5,15 +5,18 @@ import org.example.GamePanel;
 import java.awt.*;
 import java.util.Random;
 
-public class NPC_Oldman extends Entity {
+public class Maria extends Entity {
     
-    public NPC_Oldman(GamePanel gamePanel) {
+    public Maria(GamePanel gamePanel) {
         super(gamePanel);
         direction = "down";
         speed = 1;
         getImage();
+        spriteWidth = 86;
+        spriteHeight = 84;
 
-        solidArea = new Rectangle(12, 22, 36, 36);
+
+        solidArea = new Rectangle(spriteWidth/4, spriteHeight/4, (int)spriteWidth/2, spriteHeight/2);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         setDialogue();
@@ -27,14 +30,14 @@ public class NPC_Oldman extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/npc/oldman_up_1");
-        up2 = setup("/npc/oldman_up_2");
-        down1 = setup("/npc/oldman_down_1");
-        down2 = setup("/npc/oldman_down_2");
-        left1 = setup("/npc/oldman_left_1");
-        left2 = setup("/npc/oldman_left_2");
-        right1 = setup("/npc/oldman_right_1");
-        right2 = setup("/npc/oldman_right_2");
+        up1 = setup("/npc/MariaC");
+        up2 = setup("/npc/MariaC");
+        down1 = setup("/npc/MariaB");
+        down2 = setup("/npc/MariaB");
+        left1 = setup("/npc/MariaE");
+        left2 = setup("/npc/MariaE");
+        right1 = setup("/npc/MariaD");
+        right2 = setup("/npc/MariaD");
     }
 
     @Override
