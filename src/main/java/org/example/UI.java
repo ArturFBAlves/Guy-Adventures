@@ -49,6 +49,10 @@ public class UI {
             drawPlayerLife();
             drawDialogueScreen();
         }
+        if (gamePanel.gameState == gamePanel.battleState) {
+            drawPlayerLife();
+            drawBattleScreen();
+        }
     }
 
     public void drawPlayerLife() {
@@ -84,7 +88,6 @@ public class UI {
     }
 
     public void drawDialogueScreen() {
-        // Janela de Diálogo
         int x = gamePanel.tileSize * 2;
         int y = gamePanel.tileSize / 2;
         int width = gamePanel.screenWidth - (gamePanel.tileSize * 4);
@@ -96,13 +99,36 @@ public class UI {
         y += gamePanel.tileSize;
         g2d.setFont(g2d.getFont().deriveFont(Font.PLAIN, 28));
 
-        // Se houver texto definido, desenha linha por linha quebrando com \n
         if (currentDialogue != null) {
             for (String line : currentDialogue.split("\n")) {
                 g2d.drawString(line, x, y);
                 y += 40;
             }
         }
+    }
+
+    // TELA DE BATALHA COM O COMBO ATUAL
+    public void drawBattleScreen() {
+        int x = gamePanel.tileSize * 2;
+        int y = gamePanel.tileSize * 6;
+        int width = gamePanel.screenWidth - (gamePanel.tileSize * 4);
+        int height = gamePanel.tileSize * 4;
+
+        drawSubWindow(x, y, width, height);
+
+        g2d.setColor(Color.WHITE);
+        g2d.setFont(g2d.getFont().deriveFont(Font.BOLD, 24));
+
+        x += gamePanel.tileSize;
+        y += gamePanel.tileSize;
+
+        g2d.drawString("Batalha contra o Bandido!", x, y);
+        
+        // Mostra em tempo real as teclas j, h, k que o jogador está a pressionar
+        g2d.drawString("Teu Combo: " + gamePanel.playerCombo, x, y + 45);
+        
+        g2d.setFont(g2d.getFont().deriveFont(Font.PLAIN, 20));
+        g2d.drawString("Usa as teclas [J], [H], [K] e prime [ENTER] para atacar.", x, y + 90);
     }
 
     public void drawSubWindow(int x, int y, int width, int height) {
