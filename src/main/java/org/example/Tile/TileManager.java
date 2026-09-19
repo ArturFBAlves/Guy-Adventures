@@ -99,7 +99,7 @@ public class TileManager {
                     worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
                     worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY)
             {
-                g2d.drawImage(tiles[tileNum].image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+                g2d.drawImage(tiles[tileNum].image, screenX, screenY, null);
             }
             worldCol++;
             if (worldCol == gamePanel.maxWorldCol) {

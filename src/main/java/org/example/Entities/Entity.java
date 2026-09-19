@@ -12,6 +12,8 @@ public class Entity {
     GamePanel gamePanel;
     public int worldX, worldY;
     public int speed;
+    public int spriteWidth;
+    public int spriteHeight;
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public String direction;
@@ -29,6 +31,9 @@ public class Entity {
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+
+        spriteWidth = gamePanel.tileSize;
+        spriteHeight = gamePanel.tileSize;
     }
 
     public void setAction() {}
@@ -111,7 +116,14 @@ public class Entity {
                         if (spriteNumber == 1) { image = right1; } else { image = right2; }
                         break;
                 }
-                g2d.drawImage(image, ScreenX, ScreenY, gamePanel.tileSize, gamePanel.tileSize, null);
+                g2d.drawImage(
+                        image,
+                        ScreenX,
+                        ScreenY,
+                        spriteWidth,
+                        spriteHeight,
+                        null
+                );
                 g2d.setColor(Color.RED);
                 g2d.drawRect(
                     ScreenX + solidArea.x,

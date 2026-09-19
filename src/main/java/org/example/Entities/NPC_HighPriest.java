@@ -10,10 +10,13 @@ public class NPC_HighPriest extends Entity {
         speed = 0; // Fica estático ou com pouco movimento
         getImage();
 
-        solidArea = new Rectangle(12, 22, 36, 36);
+        setDialogue();
+        spriteWidth = 86;
+        spriteHeight = 84;
+
+        solidArea = new Rectangle(spriteWidth/4, spriteHeight/4, (int)spriteWidth/2, spriteHeight/2);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        setDialogue();
     }
 
     public void setDialogue() {
@@ -23,13 +26,13 @@ public class NPC_HighPriest extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/npc/priest_up_1");
-        up2 = setup("/npc/priest_up_2");
-        down1 = setup("/npc/priest_down_1");
-        down2 = setup("/npc/priest_down_2");
-        left1 = setup("/npc/priest_left_1");
-        left2 = setup("/npc/priest_left_2");
-        right1 = setup("/npc/priest_right_1");
-        right2 = setup("/npc/priest_right_2");
+        up1 = setup("/npc/SSUP");
+        up2 = setup("/npc/SSUP");
+        down1 = setup("/npc/SSD");
+        down2 = setup("/npc/SSD");
+        left1 = setup("/npc/SSL");
+        left2 = setup("/npc/SSL");
+        right1 = setup("/npc/SSR");
+        right2 = setup("/npc/SSR");
     }
 }
