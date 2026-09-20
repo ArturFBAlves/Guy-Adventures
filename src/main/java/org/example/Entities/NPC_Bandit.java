@@ -13,6 +13,9 @@ public class NPC_Bandit extends Entity {
     public NPC_Bandit(GamePanel gamePanel) {
         super(gamePanel);
 
+        spriteWidth = 86;
+        spriteHeight = 84;
+
         direction = "left";
         speed = 1; // Velocidade de movimento lenta para a patrulha
 
@@ -20,7 +23,7 @@ public class NPC_Bandit extends Entity {
         life = maxLife;
         exp = 20;
 
-        solidArea = new Rectangle(8, 16, 32, 32);
+        solidArea = new Rectangle(25, 16, 32, 48);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -29,14 +32,14 @@ public class NPC_Bandit extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/NPC/bandit_up_1", gamePanel.tileSize, gamePanel.tileSize);
-        up2 = setup("/NPC/bandit_up_2", gamePanel.tileSize, gamePanel.tileSize);
-        down1 = setup("/NPC/bandit_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        down2 = setup("/NPC/bandit_down_2", gamePanel.tileSize, gamePanel.tileSize);
-        left1 = setup("/NPC/bandit_left_1", gamePanel.tileSize, gamePanel.tileSize);
-        left2 = setup("/NPC/bandit_left_2", gamePanel.tileSize, gamePanel.tileSize);
-        right1 = setup("/NPC/bandit_right_1", gamePanel.tileSize, gamePanel.tileSize);
-        right2 = setup("/NPC/bandit_right_2", gamePanel.tileSize, gamePanel.tileSize);
+        up1 = setup("/NPC/bandit4", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("/NPC/bandit4", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/NPC/bandit1", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/NPC/bandit2", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("/NPC/bandit3", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("/NPC/bandit3", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("/NPC/bandit2", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("/NPC/bandit2", gamePanel.tileSize, gamePanel.tileSize);
     }
 
     public void setDialogue() {

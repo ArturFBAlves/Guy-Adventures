@@ -27,7 +27,7 @@ public class AssetSetter {
 
         // Arcanjo
         gamePanel.npc[3] = new NPC_Archangel(gamePanel);
-        gamePanel.npc[3].worldX = gamePanel.tileSize * 30;
+        gamePanel.npc[3].worldX = gamePanel.tileSize * 36;
         gamePanel.npc[3].worldY = gamePanel.tileSize * 10;
     }
 

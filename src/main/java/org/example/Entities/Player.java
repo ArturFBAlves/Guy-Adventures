@@ -25,7 +25,7 @@ public class Player extends Entity {
         spriteWidth = 86;
         spriteHeight = 84;
 
-        solidArea = new Rectangle(spriteWidth/3, 48, 28, 28);
+        solidArea = new Rectangle(spriteWidth/3, 32, 28, 32);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
