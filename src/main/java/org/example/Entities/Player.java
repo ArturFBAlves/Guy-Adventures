@@ -39,6 +39,12 @@ public class Player extends Entity {
         direction = "down";
         maxLife = 6;
         life = maxLife;
+        level = 1;
+        strengh = 1;
+        inteligence = 1;
+        defense = 1;
+        exp = 0;
+        nextLevelExp = 15;
     }
 
     public void getPlayerImage() {
