@@ -45,6 +45,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int pauseState = 2;
     public final int dialogueState = 3;
     public final int battleState = 4; // NOVO: Estado de combate adicionado
+    public final int characterState = 5;
 
     // NOVO: Controlo de História (0 = Ato do Bandido, 1 = Ato do Sumo, 2 = Ato do Arcanjo)
     public int storyProgress = 0; 

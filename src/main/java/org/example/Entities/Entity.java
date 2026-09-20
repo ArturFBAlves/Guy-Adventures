@@ -28,6 +28,12 @@ public class Entity {
     public int dialogueIndex = 0;
 
     public int maxLife, life;
+    public int level;
+    public int strengh;
+    public int inteligence;
+    public int defense;
+    public int exp;
+    public int nextLevelExp;
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
