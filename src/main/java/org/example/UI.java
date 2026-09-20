@@ -19,6 +19,8 @@ public class UI {
 
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public int slotCol = 0;
+    public int slotRow = 0;
 
     public UI(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -58,6 +60,7 @@ public class UI {
         }
         if (gamePanel.gameState == gamePanel.characterState) {
             drawCharacterScreen();
+            drawInventory();
         }
     }
 
@@ -202,6 +205,35 @@ public class UI {
         
         g2d.setFont(g2d.getFont().deriveFont(Font.PLAIN, 20));
         g2d.drawString("Usa as teclas [J], [H], [K] e prime [ENTER] para atacar.", x, y + 90);
+    }
+
+    public void drawInventory() {
+        int frameX = gamePanel.tileSize * 9;
+        int frameY = gamePanel.tileSize;
+        int frameWidth = gamePanel.tileSize*6;
+        int frameHeight = gamePanel.tileSize*5;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        final int slotXstart = frameX + 20;
+        final int slotYstart = frameY + 20;
+        int slotX = slotXstart, slotY = slotYstart;
+
+        for (int i = 0; i<gamePanel.player.inventory.size(); i++) {
+            g2d.drawImage(gamePanel.player.inventory.get(i).down1, slotX, slotY, null);
+
+            slotX += gamePanel.tileSize;
+            if (i == 4 || i == 9 || i == 14 ) {
+                slotX = slotXstart;
+                slotY += slotYstart;
+            }
+        }
+
+        int cursorX = slotXstart+(gamePanel.tileSize*slotCol), cursorY = slotYstart+(gamePanel.tileSize*slotRow), cursosWidth = gamePanel.tileSize, cursosHeight = gamePanel.tileSize;
+
+        g2d.setColor(Color.WHITE);
+        g2d.setStroke(new BasicStroke(3));
+        g2d.drawRoundRect(cursorX, cursorY, cursosWidth, cursosHeight, 10, 10);
+
     }
 
     public void drawSubWindow(int x, int y, int width, int height) {

@@ -78,9 +78,11 @@ public class TileManager {
         setup(35, "grass_border8", true);
         setup(36, "grass_border9", true);
 
+        setup(39, "sign", true);
+
         // item e armadilha: troque pelas imagens quando tiver
-        setup(37, "grass5", false);          // item (placeholder)
-        setup(38, "grass5", false);          // armadilha (placeholder)
+        setup(37, "grass5", false);
+        setup(38, "grass5", false);
 
     }
 

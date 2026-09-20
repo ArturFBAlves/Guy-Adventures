@@ -14,10 +14,10 @@ public class EventHandler {
         this.gamePanel = gamePanel;
 
         eventRect = new Rectangle();
-        eventRect.x = 23;
-        eventRect.y = 23;
-        eventRect.width = 2;
-        eventRect.height = 2;
+        eventRect.x = 0;
+        eventRect.y = 0;
+        eventRect.width = 26;
+        eventRect.height = 26;
 
         eventRectDefaultX = eventRect.x;
         eventRectDefaultY = eventRect.y;
@@ -34,11 +34,14 @@ public class EventHandler {
         if (canTouchEvent) {
             if (hit(26, 15, "any")) {
                 damagePit(gamePanel.dialogueState);
-            } else if (hit(27, 15, "any")) {
+            } else if (hit(35, 10, "any") || hit(34, 10, "any") || hit(33, 10, "any") || hit(32, 10, "any") || hit(32, 10, "any") || hit(31, 10, "any")) {
                 healingPool(gamePanel.dialogueState);
             } else if (hit(28, 15, "any")) {
                 teleport(gamePanel.dialogueState);
             }
+//            else if () {
+//                //placa
+//            }
         }
     }
 

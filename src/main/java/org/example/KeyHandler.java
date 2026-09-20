@@ -45,6 +45,26 @@ public class KeyHandler implements KeyListener {
         else if (gamePanel.gameState == gamePanel.characterState) {
             characterState(code);
         }
+        if (code == KeyEvent.VK_W) {
+            if (gamePanel.ui.slotRow != 0 ) {
+                gamePanel.ui.slotRow--;
+            }
+        }
+        if (code == KeyEvent.VK_A) {
+            if (gamePanel.ui.slotCol != 0 ) {
+                gamePanel.ui.slotCol--;
+            }
+        }
+        if (code == KeyEvent.VK_S) {
+            if (gamePanel.ui.slotRow != 3 ) {
+                gamePanel.ui.slotRow++;
+            }
+        }
+        if (code == KeyEvent.VK_D) {
+            if (gamePanel.ui.slotCol != 4 ) {
+                gamePanel.ui.slotCol++;
+            }
+        }
     }
 
     public void battleState(int code) {

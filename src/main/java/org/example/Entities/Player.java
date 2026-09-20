@@ -2,9 +2,11 @@ package org.example.Entities;
 
 import org.example.GamePanel;
 import org.example.KeyHandler;
+import org.example.object.OBJ_Heart;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Player extends Entity {
@@ -12,6 +14,8 @@ public class Player extends Entity {
     KeyHandler keyHandler;
     public int screenX;
     public int screenY;
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int inventorySize = 20;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         super(gamePanel);
@@ -35,6 +39,7 @@ public class Player extends Entity {
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
+        setItems();
     }
 
     public void setDefaultValues() {
@@ -50,6 +55,13 @@ public class Player extends Entity {
         defense = 1;
         exp = 0;
         nextLevelExp = 15;
+    }
+
+    public void setItems() {
+//        inventory.add(currentWeapon);
+//        inventory.add(currentShield);
+//        inventory.add(new OBJ_Heart(gamePanel));
+//        inventory.add(new OBJ_Heart(gamePanel));
     }
 
     public void getPlayerImage() {
