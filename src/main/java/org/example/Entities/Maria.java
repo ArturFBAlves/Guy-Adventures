@@ -30,14 +30,14 @@ public class Maria extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/npc/MariaC");
-        up2 = setup("/npc/MariaC");
-        down1 = setup("/npc/MariaB");
-        down2 = setup("/npc/MariaB");
-        left1 = setup("/npc/MariaE");
-        left2 = setup("/npc/MariaE");
-        right1 = setup("/npc/MariaD");
-        right2 = setup("/npc/MariaD");
+        up1 = setup("/npc/MariaC", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("/npc/MariaC", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/npc/MariaB", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/npc/MariaB", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("/npc/MariaE", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("/npc/MariaE", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("/npc/MariaD", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("/npc/MariaD", gamePanel.tileSize, gamePanel.tileSize);
     }
 
     @Override

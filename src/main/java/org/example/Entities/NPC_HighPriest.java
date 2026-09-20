@@ -26,13 +26,13 @@ public class NPC_HighPriest extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/npc/SSUP");
-        up2 = setup("/npc/SSUP");
-        down1 = setup("/npc/SSD");
-        down2 = setup("/npc/SSD");
-        left1 = setup("/npc/SSL");
-        left2 = setup("/npc/SSL");
-        right1 = setup("/npc/SSR");
-        right2 = setup("/npc/SSR");
+        up1 = setup("/npc/SSUP", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("/npc/SSUP", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/npc/SSD", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/npc/SSD", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("/npc/SSL", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("/npc/SSL", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("/npc/SSR", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("/npc/SSR", gamePanel.tileSize, gamePanel.tileSize);
     }
 }

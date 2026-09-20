@@ -68,6 +68,19 @@ public class TileManager {
         setup(26, "house8", true);
         setup(27, "house9", true);
 
+        setup(28, "grass_border1", true);
+        setup(29, "grass_border2", true);
+        setup(30, "grass_border3", true);
+        setup(31, "grass_border4", true);
+        setup(32, "grass5", true);
+        setup(33, "grass_border6", true);
+        setup(34, "grass_border7", true);
+        setup(35, "grass_border8", true);
+        setup(36, "grass_border9", true);
+
+        // item e armadilha: troque pelas imagens quando tiver
+        setup(37, "grass5", false);          // item (placeholder)
+        setup(38, "grass5", false);          // armadilha (placeholder)
 
     }
 
@@ -87,7 +100,7 @@ public class TileManager {
 
     public void loadMap() {
         try {
-            InputStream stream = getClass().getResourceAsStream("/Maps/World.txt");
+            InputStream stream = getClass().getResourceAsStream("/Maps/World2.txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 
             int col = 0, row = 0;
