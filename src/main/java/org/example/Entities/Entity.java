@@ -145,13 +145,6 @@ public class Entity {
                 );
                 g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
-                g2d.setColor(Color.RED);
-                g2d.drawRect(
-                        ScreenX + solidArea.x,
-                        ScreenY + solidArea.y,
-                        solidArea.width,
-                        solidArea.height
-                );
         }
     }
 

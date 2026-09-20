@@ -1,5 +1,6 @@
-package org.example.Entities;
+package org.example.Entities.Npc;
 
+import org.example.Entities.Entity;
 import org.example.GamePanel;
 import java.awt.*;
 
@@ -12,7 +13,8 @@ public class NPC_Archangel extends Entity {
 
         spriteWidth = 86;
         spriteHeight = 84;
-
+        worldX = gamePanel.tileSize * 36;
+        worldY = gamePanel.tileSize * 10;
         solidArea = new Rectangle(12, 22, 36, 36);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;

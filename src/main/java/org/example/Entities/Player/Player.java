@@ -1,5 +1,6 @@
-package org.example.Entities;
+package org.example.Entities.Player;
 
+import org.example.Entities.Entity;
 import org.example.GamePanel;
 import org.example.KeyHandler;
 
@@ -206,14 +207,15 @@ public class Player extends Entity {
         if (i != 999) {
             if (gamePanel.monster[i].invinsible == false) {
                 gamePanel.monster[i].life -= 1;
+                gamePanel.ui.addMessage("HIT");
                 gamePanel.monster[i].invinsible = true;
                 if(gamePanel.monster[i].life <= 0) {
+                    gamePanel.ui.addMessage("MORREU");
+                    exp += gamePanel.monster[i].exp;
+                    checkLevelUp();
                     gamePanel.monster[i] = null;
                 }
             }
-        }
-        else {
-            System.out.printf("miss");
         }
     }
 
@@ -293,8 +295,6 @@ public class Player extends Entity {
             g2d.drawImage(image, screenX, screenY, spriteWidth, spriteHeight, null);
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
-            g2d.setColor(Color.RED);
-            g2d.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
         }
     }
 }

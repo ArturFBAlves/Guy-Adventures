@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.Entities.Entity;
-import org.example.Entities.NPC_Bandit;
+import org.example.Entities.Npc.NPC_Bandit;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -65,7 +65,7 @@ public class KeyHandler implements KeyListener {
 
             NPC_Bandit activeBandit = null;
             for (Entity n : gamePanel.npc) {
-                if (n instanceof org.example.Entities.NPC_Bandit) {
+                if (n instanceof NPC_Bandit) {
                     activeBandit = (NPC_Bandit) n;
                     break;
                 }

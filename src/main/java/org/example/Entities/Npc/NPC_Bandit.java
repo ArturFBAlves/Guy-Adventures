@@ -1,5 +1,6 @@
-package org.example.Entities;
+package org.example.Entities.Npc;
 
+import org.example.Entities.Entity;
 import org.example.GamePanel;
 import java.awt.*;
 import java.util.Random;
@@ -15,7 +16,8 @@ public class NPC_Bandit extends Entity {
 
         spriteWidth = 86;
         spriteHeight = 84;
-
+        worldX = gamePanel.tileSize * 22;
+        worldY = gamePanel.tileSize * 8;
         direction = "left";
         speed = 1; // Velocidade de movimento lenta para a patrulha
 

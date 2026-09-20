@@ -1,4 +1,4 @@
-package org.example.monster;
+package org.example.Entities.monster;
 
 import org.example.Entities.Entity;
 import org.example.GamePanel;
@@ -15,6 +15,7 @@ public class Devil_Slime extends Entity {
         speed = 1;
         maxLife = 4;
         life = maxLife;
+        exp = 8;
 
         solidArea.x = 3;
         solidArea.y = 18;

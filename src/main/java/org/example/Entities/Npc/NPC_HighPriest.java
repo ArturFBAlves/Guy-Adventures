@@ -1,5 +1,6 @@
-package org.example.Entities;
+package org.example.Entities.Npc;
 
+import org.example.Entities.Entity;
 import org.example.GamePanel;
 import java.awt.*;
 
@@ -8,15 +9,19 @@ public class NPC_HighPriest extends Entity {
         super(gamePanel);
         direction = "down";
         speed = 0; // Fica estático ou com pouco movimento
-        getImage();
 
-        setDialogue();
+        worldX = gamePanel.tileSize * 28;
+        worldY = gamePanel.tileSize * 17;
+
         spriteWidth = 86;
         spriteHeight = 84;
 
         solidArea = new Rectangle(spriteWidth/4, spriteHeight/4, (int)spriteWidth/2, spriteHeight/2);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
+        setDialogue();
+        getImage();
     }
 
     public void setDialogue() {

@@ -25,18 +25,6 @@ public class TileManager {
     }
 
     public void getTileImage() {
-//        setup(0, "grass_tile", true);
-//        setup(1, "brick_tile", false);
-//        setup(2, "water_tile", true);
-//        setup(3, "grass1_tile", false);
-//        setup(4, "grass2_tile", false);
-//        setup(5, "grass3_tile", false);
-        setup(18, "tree2_tile", true);
-//        setup(7, "straightside_path_tile", false);
-//        setup(8, "grass0_tile1", false);
-//        setup(9, "sand_tile1", false);
-//        setup(10, "sand_tile2", false);
-//        setup(11, "sandshell_tile3", false);
 
         setup(0, "grass1", false);
         setup(1, "grass2", false);
@@ -47,7 +35,6 @@ public class TileManager {
         setup(6, "grass7", false);
         setup(7, "grass8", false);
         setup(8, "grass9", false);
-
         setup(9, "water1", true);
         setup(10, "water2", true);
         setup(11, "water3", true);
@@ -57,7 +44,7 @@ public class TileManager {
         setup(15, "water7", true);
         setup(16, "water8", true);
         setup(17, "water9", true);
-
+        setup(18, "tree2_tile", true);
         setup(19, "house1", true);
         setup(20, "house2", true);
         setup(21, "house3", true);
@@ -67,7 +54,6 @@ public class TileManager {
         setup(25, "house7", true);
         setup(26, "house8", true);
         setup(27, "house9", true);
-
         setup(28, "grass_border1", true);
         setup(29, "grass_border2", true);
         setup(30, "grass_border3", true);
@@ -77,10 +63,6 @@ public class TileManager {
         setup(34, "grass_border7", true);
         setup(35, "grass_border8", true);
         setup(36, "grass_border9", true);
-
-        // item e armadilha: troque pelas imagens quando tiver
-        setup(37, "grass5", false);          // item (placeholder)
-        setup(38, "grass5", false);          // armadilha (placeholder)
 
     }
 

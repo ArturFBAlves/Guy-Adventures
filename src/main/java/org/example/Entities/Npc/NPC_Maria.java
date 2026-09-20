@@ -1,16 +1,19 @@
-package org.example.Entities;
+package org.example.Entities.Npc;
 
+import org.example.Entities.Entity;
 import org.example.GamePanel;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Maria extends Entity {
+public class NPC_Maria extends Entity {
     
-    public Maria(GamePanel gamePanel) {
+    public NPC_Maria(GamePanel gamePanel) {
         super(gamePanel);
         direction = "down";
         speed = 1;
+        worldX = gamePanel.tileSize*24;
+        worldY = gamePanel.tileSize*24;
         getImage();
         spriteWidth = 86;
         spriteHeight = 84;

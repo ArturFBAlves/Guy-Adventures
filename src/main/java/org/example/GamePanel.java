@@ -2,12 +2,13 @@ package org.example;
 
 import org.example.Entities.AssetSetter;
 import org.example.Entities.Entity;
-import org.example.Entities.Player;
+import org.example.Entities.Player.Player;
 import org.example.Tile.TileManager;
 import org.example.object.SuperObject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
@@ -23,11 +24,9 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     public KeyHandler keyHandler = new KeyHandler(this);
 
-    //World Map
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
-    public final int maxWorldWidth = maxWorldCol * tileSize;
-    public final int maxWorldHeight = maxWorldRow * tileSize;
+
     int FPS = 60;
 
     public Player player = new Player(this, keyHandler);
@@ -37,7 +36,6 @@ public class GamePanel extends JPanel implements Runnable {
     public TileManager tileManager = new TileManager(this);
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
-    public SuperObject[] obj = new SuperObject[10];
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
 
@@ -48,8 +46,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int battleState = 4; // NOVO: Estado de combate adicionado
     public final int characterState = 5;
 
-    // NOVO: Controlo de História (0 = Ato do Bandido, 1 = Ato do Sumo, 2 = Ato do Arcanjo)
-    public int storyProgress = 0; 
+    public int storyProgress = 0;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -111,8 +108,6 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameState == pauseState) {
             // Lógica de pausa se necessário
         }
-        // Nota: No battleState ou dialogueState, o jogo pára de atualizar o movimento normal, 
-        // o que é perfeito para menus e conversas.
     }
 
     @Override
@@ -121,8 +116,7 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2d = (Graphics2D) g;
         tileManager.draw(g2d);
 
-        // Junta todas as entidades desenháveis numa lista
-        java.util.List<Entity> entityList = new java.util.ArrayList<>();
+        ArrayList<Entity> entityList = new ArrayList<>();
         entityList.add(player);
         for (Entity n : npc) {
             if (n != null) {
@@ -136,7 +130,6 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-        // Ordena por worldY (quem está mais acima na tela desenha primeiro)
         entityList.sort((e1, e2) -> Integer.compare(e1.worldY, e2.worldY));
 
         for (Entity e : entityList) {

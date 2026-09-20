@@ -13,11 +13,9 @@ public class UI {
     Font arial_30;
 
     BufferedImage heart_full, heart_half, heart_blank;
-    public boolean messageOn = false;
     ArrayList<String> message = new ArrayList<String>();
     ArrayList<Integer> messageCounter = new ArrayList<Integer>();
 
-    public boolean gameFinished = false;
     public String currentDialogue = "";
 
     public UI(GamePanel gamePanel) {
