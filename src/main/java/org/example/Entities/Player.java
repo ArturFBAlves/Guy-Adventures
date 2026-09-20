@@ -5,6 +5,7 @@ import org.example.KeyHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Player extends Entity {
 
@@ -121,6 +122,28 @@ public class Player extends Entity {
                 gamePanel.npc[index].speak();
                 gamePanel.keyHandler.fPressed = false; 
             }
+        }
+    }
+
+    public void checkLevelUp() {
+        if (exp >= nextLevelExp) {
+            level++;
+            exp -= nextLevelExp;
+            gamePanel.ui.addMessage("Você passou para o nível " +  level + " parabéns!");
+            randomStatusUp();
+        }
+    }
+
+    public void randomStatusUp() {
+        Random random = new Random();
+        int statusUp = random.nextInt(1,3);
+        switch (statusUp) {
+            case 1:
+                maxLife++;
+                life++;
+                break;
+            case 2:
+                speed++;
         }
     }
 

@@ -5,6 +5,7 @@ import org.example.object.SuperObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class UI {
     GamePanel gamePanel;
@@ -13,8 +14,9 @@ public class UI {
 
     BufferedImage heart_full, heart_half, heart_blank;
     public boolean messageOn = false;
-    public String message = "";
-    int messageCounter = 0;
+    ArrayList<String> message = new ArrayList<String>();
+    ArrayList<Integer> messageCounter = new ArrayList<Integer>();
+
     public boolean gameFinished = false;
     public String currentDialogue = "";
 
@@ -28,9 +30,9 @@ public class UI {
         heart_blank = heart.image3;
     }
 
-    public void showMessage(String text) {
-        message = text;
-        messageOn = true;
+    public void addMessage(String text) {
+        message.add(text);
+        messageCounter.add(0);
     }
 
     public void draw(Graphics2D g2d) {
@@ -40,6 +42,7 @@ public class UI {
 
         if (gamePanel.gameState == gamePanel.playState) {
             drawPlayerLife();
+            drawMessage();
         }
         if (gamePanel.gameState == gamePanel.pauseState) {
             drawPlayerLife();
@@ -122,6 +125,32 @@ public class UI {
             }
             i++;
             x += gamePanel.tileSize;
+        }
+    }
+
+    public void drawMessage() {
+        int messageX = gamePanel.tileSize;
+        int messageY = gamePanel.tileSize * 4;
+
+        g2d.setFont(g2d.getFont().deriveFont(Font.BOLD, 32F));
+
+        for(int i = 0; i < message.size(); i++) {
+            if(message.get(i) != null) {
+
+                g2d.setColor(Color.BLACK);
+                g2d.drawString(message.get(i), messageX + 2, messageY + 2);
+                g2d.setColor(Color.WHITE);
+                g2d.drawString(message.get(i), messageX, messageY);
+
+                int counter = messageCounter.get(i) + 1;
+                messageCounter.set(i, counter);
+                messageY += 50;
+
+                if (messageCounter.get(i) > 180) {
+                    message.remove(i);
+                    messageCounter.remove(i);
+                }
+            }
         }
     }
 

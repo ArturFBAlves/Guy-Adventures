@@ -1,6 +1,8 @@
 package org.example;
 
 import org.example.Entities.Entity;
+import org.example.Entities.NPC_Bandit;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -61,10 +63,10 @@ public class KeyHandler implements KeyListener {
         // Quando pressiona F ou ENTER, submete e valida o combo acumulado
         if (code == KeyEvent.VK_F || code == KeyEvent.VK_ENTER) {
 
-            Entity activeBandit = null;
+            NPC_Bandit activeBandit = null;
             for (Entity n : gamePanel.npc) {
                 if (n instanceof org.example.Entities.NPC_Bandit) {
-                    activeBandit = n;
+                    activeBandit = (NPC_Bandit) n;
                     break;
                 }
             }
@@ -76,6 +78,10 @@ public class KeyHandler implements KeyListener {
                 if (gamePanel.playerCombo.equals(correctCombo)) {
                     gamePanel.storyProgress = 1; // Avança para o Ato 2
                     gamePanel.gameState = gamePanel.playState;
+
+                    gamePanel.ui.addMessage("Você matou o bandido!!!");
+                    gamePanel.player.exp += activeBandit.exp;
+                    gamePanel.player.checkLevelUp();
 
                     // Remove o bandido do mapa
                     activeBandit.worldX = 0;
