@@ -5,6 +5,7 @@ import org.example.KeyHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Player extends Entity {
 
@@ -43,6 +44,12 @@ public class Player extends Entity {
         direction = "down";
         maxLife = 6;
         life = maxLife;
+        level = 1;
+        strengh = 1;
+        inteligence = 1;
+        defense = 1;
+        exp = 0;
+        nextLevelExp = 15;
     }
 
     public void getPlayerImage() {
@@ -220,6 +227,28 @@ public class Player extends Entity {
         else {
                 attacking = true;
             }
+        }
+    }
+
+    public void checkLevelUp() {
+        if (exp >= nextLevelExp) {
+            level++;
+            exp -= nextLevelExp;
+            gamePanel.ui.addMessage("Você passou para o nível " +  level + " parabéns!");
+            randomStatusUp();
+        }
+    }
+
+    public void randomStatusUp() {
+        Random random = new Random();
+        int statusUp = random.nextInt(1,3);
+        switch (statusUp) {
+            case 1:
+                maxLife++;
+                life++;
+                break;
+            case 2:
+                speed++;
         }
     }
 

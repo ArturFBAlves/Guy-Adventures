@@ -18,6 +18,7 @@ public class NPC_Bandit extends Entity {
 
         maxLife = 6;
         life = maxLife;
+        exp = 20;
 
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = solidArea.x;
