@@ -1,6 +1,7 @@
 package org.example.Entities.Player;
 
 import org.example.Entities.Entity;
+import org.example.Enums.State;
 import org.example.GamePanel;
 import org.example.KeyHandler;
 
@@ -101,7 +102,7 @@ public class Player extends Entity {
         }
 
         // Se estiver em diálogo, o player fica totalmente travado (não anda nem anima)
-        if (gamePanel.gameState == gamePanel.dialogueState) {
+        if (gamePanel.gameState == State.dialogueState) {
             return;
         }
 
@@ -222,7 +223,7 @@ public class Player extends Entity {
     public void interactNPC(int index) {
         if (gamePanel.keyHandler.fPressed == true) {
             if (index != 999) {
-                gamePanel.gameState = gamePanel.dialogueState;
+                gamePanel.gameState = State.dialogueState;
                 gamePanel.npc[index].speak();
                 gamePanel.keyHandler.fPressed = false;
             }

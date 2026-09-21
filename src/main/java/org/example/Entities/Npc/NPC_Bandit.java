@@ -1,6 +1,7 @@
 package org.example.Entities.Npc;
 
 import org.example.Entities.Entity;
+import org.example.Enums.State;
 import org.example.GamePanel;
 import java.awt.*;
 import java.util.Random;
@@ -72,7 +73,6 @@ public class NPC_Bandit extends Entity {
             actionLockCounter = 0;
         }
 
-        // Limita o espaço de patrulha para ele andar apenas num curto espaço (ex: 3 tiles para cada lado)
         int patrolLimit = gamePanel.tileSize * 3;
         if (worldX < startX - patrolLimit) {
             direction = "right";
@@ -86,11 +86,11 @@ public class NPC_Bandit extends Entity {
     public void speak() {
         if (dialogues[dialogueIndex] == null) {
             dialogueIndex = 0;
-            gamePanel.gameState = gamePanel.battleState; // Entra na batalha
+            gamePanel.gameState = State.battleState; // Entra na batalha
             return;
         }
         
-        gamePanel.ui.currentDialogue = dialogues[dialogueIndex];
+        gamePanel.ui.dialogueUI.currentDialogue = dialogues[dialogueIndex];
         dialogueIndex++;
 
         switch(gamePanel.player.direction) {

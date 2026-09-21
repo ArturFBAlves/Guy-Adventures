@@ -1,5 +1,6 @@
 package org.example.Entities;
 
+import org.example.Enums.State;
 import org.example.GamePanel;
 import org.example.UtilityTool;
 
@@ -54,10 +55,10 @@ public class Entity {
     public void speak() {
     if (dialogues[dialogueIndex] == null) {
         dialogueIndex = 0;
-        gamePanel.gameState = gamePanel.playState; // Fecha a caixa e volta ao jogo
+        gamePanel.gameState = State.playState; // Fecha a caixa e volta ao jogo
         return;
     }
-    gamePanel.ui.currentDialogue = dialogues[dialogueIndex];
+    gamePanel.ui.dialogueUI.currentDialogue = dialogues[dialogueIndex];
     dialogueIndex++;
 
     // Faz o NPC olhar para o jogador

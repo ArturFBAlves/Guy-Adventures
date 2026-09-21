@@ -32,7 +32,7 @@ public class AssetSetter {
         Random rand = new Random();
         for (int i = 0; i < 3; i++) {
             int posX = rand.nextInt(22, 30);
-            int posY = rand.nextInt(17, 30);
+            int posY = rand.nextInt(17, 25);
             gamePanel.monster[i] = new Devil_Slime(gamePanel);
             gamePanel.monster[i].worldX = gamePanel.tileSize * posX;
             gamePanel.monster[i].worldY = gamePanel.tileSize * posY;

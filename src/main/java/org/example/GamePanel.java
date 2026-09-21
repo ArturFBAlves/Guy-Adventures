@@ -3,8 +3,9 @@ package org.example;
 import org.example.Entities.AssetSetter;
 import org.example.Entities.Entity;
 import org.example.Entities.Player.Player;
+import org.example.Enums.State;
 import org.example.Tile.TileManager;
-import org.example.object.SuperObject;
+import org.example.UI.UI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public int screenWidth = maxScreenCol * tileSize;
     public int screenHeight = maxScreenRow * tileSize;
+
     public String playerCombo = ""; // Guarda os comandos digitados na batalha (ex: "jhhjhk")
     Thread gameThread;
     public KeyHandler keyHandler = new KeyHandler(this);
@@ -39,14 +41,8 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
 
-    public int gameState;
-    public final int playState = 1;
-    public final int pauseState = 2;
-    public final int dialogueState = 3;
-    public final int battleState = 4; // NOVO: Estado de combate adicionado
-    public final int characterState = 5;
+    public State gameState;
 
-    public int storyProgress = 0;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -59,7 +55,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         assetSetter.setNPC();
         assetSetter.setMonster();
-        gameState = playState;
+        gameState = State.playState;
     }
 
     public void startGameThread() {
@@ -84,7 +80,6 @@ public class GamePanel extends JPanel implements Runnable {
                     remainingTime = 0;
                 }
                 Thread.sleep((long) remainingTime);
-                nextDrawTime += drawInterval;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -92,7 +87,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if (gameState == playState) {
+        if (gameState == State.playState) {
             player.update();
             for (int i = 0; i < npc.length; i++) {
                 if (npc[i] != null) {
@@ -105,14 +100,13 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
         }
-        if (gameState == pauseState) {
+        if (gameState == State.pauseState) {
             // Lógica de pausa se necessário
         }
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         tileManager.draw(g2d);
 
@@ -135,7 +129,6 @@ public class GamePanel extends JPanel implements Runnable {
         for (Entity e : entityList) {
             e.draw(g2d);
         }
-
         ui.draw(g2d);
 
         g2d.dispose();

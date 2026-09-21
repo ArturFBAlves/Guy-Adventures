@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.Entities.Entity;
 import org.example.Entities.Npc.NPC_Bandit;
+import org.example.Enums.State;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -23,26 +24,26 @@ public class KeyHandler implements KeyListener {
         int code = e.getKeyCode();
 
         // 1. PLAY STATE
-        if (gamePanel.gameState == gamePanel.playState) {
+        if (gamePanel.gameState == State.playState) {
             playerState(code);
         }
 
         // 2. PAUSE STATE
-        else if (gamePanel.gameState == gamePanel.pauseState) {
+        else if (gamePanel.gameState == State.pauseState) {
             pauseState(code);
         }
 
         // 3. DIALOGUE STATE
-        else if (gamePanel.gameState == gamePanel.dialogueState) {
+        else if (gamePanel.gameState == State.dialogueState) {
             dialogueState(code);
         }
 
         // 4. BATTLE STATE (Sistema de Combos por Sequência)
-        else if (gamePanel.gameState == gamePanel.battleState) {
+        else if (gamePanel.gameState == State.battleState) {
             battleState(code);
         }
 
-        else if (gamePanel.gameState == gamePanel.characterState) {
+        else if (gamePanel.gameState == State.characterState) {
             characterState(code);
         }
     }
@@ -76,8 +77,8 @@ public class KeyHandler implements KeyListener {
 
                 // Se acertar o combo exato
                 if (gamePanel.playerCombo.equals(correctCombo)) {
-                    gamePanel.storyProgress = 1; // Avança para o Ato 2
-                    gamePanel.gameState = gamePanel.playState;
+ // Avança para o Ato 2
+                    gamePanel.gameState = State.playState;
 
                     gamePanel.ui.addMessage("Você matou o bandido!!!");
                     gamePanel.player.exp += activeBandit.exp;
@@ -94,8 +95,8 @@ public class KeyHandler implements KeyListener {
                     // Verifica se o jogador morreu
                     if (gamePanel.player.life <= 0) {
                         gamePanel.player.life = gamePanel.player.maxLife;
-                        gamePanel.storyProgress = 0;
-                        gamePanel.gameState = gamePanel.playState;
+
+                        gamePanel.gameState = State.playState;
 
                         gamePanel.player.worldX = gamePanel.tileSize * 23;
                         gamePanel.player.worldY = gamePanel.tileSize * 21;
@@ -114,17 +115,17 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT) { leftPressed = true; }
         if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) { rightPressed = true; }
         if (code == KeyEvent.VK_F || code == KeyEvent.VK_ENTER) { fPressed = true; }
-        if (code == KeyEvent.VK_P) { gamePanel.gameState = gamePanel.pauseState; }
-        if (code == KeyEvent.VK_I) { gamePanel.gameState = gamePanel.characterState; }
+        if (code == KeyEvent.VK_P) { gamePanel.gameState = State.pauseState; }
+        if (code == KeyEvent.VK_I) { gamePanel.gameState = State.characterState; }
     }
 
     public void pauseState(int code) {
-        if (code == KeyEvent.VK_P) { gamePanel.gameState = gamePanel.playState; }
+        if (code == KeyEvent.VK_P) { gamePanel.gameState = State.playState; }
     }
 
     public void characterState(int code) {
         if (code == KeyEvent.VK_I) {
-            gamePanel.gameState = gamePanel.playState;
+            gamePanel.gameState = State.playState;
         }
     }
     public void dialogueState(int code) {
@@ -133,7 +134,7 @@ public class KeyHandler implements KeyListener {
             if (npcIndex != 999) {
                 gamePanel.npc[npcIndex].speak();
             } else {
-                gamePanel.gameState = gamePanel.playState;
+                gamePanel.gameState = State.playState;
             }
         }
     }

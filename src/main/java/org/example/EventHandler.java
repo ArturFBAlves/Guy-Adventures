@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Enums.State;
+
 import java.awt.*;
 
 public class EventHandler {
@@ -33,11 +35,11 @@ public class EventHandler {
         }
         if (canTouchEvent) {
             if (hit(26, 15, "any")) {
-                damagePit(gamePanel.dialogueState);
+                damagePit(State.dialogueState);
             } else if (hit(27, 15, "any")) {
-                healingPool(gamePanel.dialogueState);
+                healingPool(State.dialogueState);
             } else if (hit(28, 15, "any")) {
-                teleport(gamePanel.dialogueState);
+                teleport(State.dialogueState);
             }
         }
     }
@@ -68,27 +70,27 @@ public class EventHandler {
         return hit;
     }
 
-    public void damagePit(int gameState) {
+    public void damagePit(State gameState) {
         gamePanel.gameState = gameState;
-        gamePanel.ui.currentDialogue = "Você caiu em um buraco e levou dano!";
+        gamePanel.ui.dialogueUI.currentDialogue = "Você caiu em um buraco e levou dano!";
         gamePanel.player.life -= 1;
 
         // Bloqueia novos disparos até o jogador se mover para fora da área
         canTouchEvent = false;
     }
 
-    public void healingPool(int gameState) {
-        if (gamePanel.keyHandler.fPressed == true) {
+    public void healingPool(State gameState) {
+        if (gamePanel.keyHandler.fPressed) {
             gamePanel.gameState = gameState;
-            gamePanel.ui.currentDialogue = "Você bebeu a água e regenerou a vida!";
+            gamePanel.ui.dialogueUI.currentDialogue = "Você bebeu a água e regenerou a vida!";
             gamePanel.player.life = gamePanel.player.maxLife;
         }
     }
 
-    public void teleport(int gameState) {
-        if(gamePanel.keyHandler.fPressed == true){
+    public void teleport(State gameState) {
+        if(gamePanel.keyHandler.fPressed){
             gamePanel.gameState = gameState;
-            gamePanel.ui.currentDialogue = "Teleport!";
+            gamePanel.ui.dialogueUI.currentDialogue = "Teleport!";
             gamePanel.player.worldX = gamePanel.tileSize*37;
             gamePanel.player.worldY = gamePanel.tileSize*37;
         }
